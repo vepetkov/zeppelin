@@ -1,0 +1,26 @@
+services:
+  - docker:dind
+
+variables:
+  APP: "zeppelin"
+  APP_VERSION: "0.8.0-SNAPSHOT"
+  REPOSITORY_NAME: "${APP}"
+  SCALA_VER: "2.11"
+  SPARK_VER: "2.2"
+  BRANCH: "branch-0.8"
+  DOCKER_DRIVER: overlay
+  DOCKER_HOST: tcp://localhost:2375
+
+stages:
+  - docker
+
+docker:
+  stage: docker
+  only:
+    - master
+  script:
+    - docker build --build-arg BRANCH=${BRANCH} --build-arg SCALA_VER=${SCALA_VER} --build-arg SPARK_VER=${SPARK_VER} --build-arg COMMIT_ID=${CI_COMMIT_SHA} --build-arg BUILD_NUMBER=${CI_JOB_ID} -t ${APP}:latest .
+    - docker login -u ${DOCKER_REGISTRY_USER} -p ${DOCKER_REGISTRY_PASS} "https://${DOCKER_REGISTRY}"
+    - docker tag ${APP}:latest ${DOCKER_REGISTRY}/${REPOSITORY_NAME}:latest
+    - docker tag ${APP}:latest ${DOCKER_REGISTRY}/${REPOSITORY_NAME}:${APP_VERSION}
+    - docker push ${DOCKER_REGISTRY}/${REPOSITORY_NAME}
