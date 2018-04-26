@@ -75,9 +75,21 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 		curl \
         jq \
 		nodejs \
-		python3 python3-setuptools \
+		python3 python3-pip \
         r-base-dev r-cran-evaluate \
 	&& rm -rf /var/lib/apt/lists/* \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python2 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
+    && pip3 install --upgrade pip \
+    && pip3 install \
+          conda \
+          matplotlib \
+          numpy \
+          pandas \
+          py4j \
+          scikit-learn \
+          scipy \
+          seaborn \
     && npm install -g yarn
 
 WORKDIR $ZEPPELIN_HOME
