@@ -17,10 +17,10 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 		git \
 		nodejs \
 		python3 python3-setuptools \
-        r-base-dev r-cran-evaluate \
+    r-base-dev r-cran-evaluate \
 	&& rm -rf /var/lib/apt/lists/* \
-    && mkdir -p $ZEPPELIN_SRC \
-    && git clone --branch $BRANCH https://github.com/apache/zeppelin.git $ZEPPELIN_SRC
+  && mkdir -p $ZEPPELIN_SRC \
+  && git clone --branch $BRANCH https://github.com/apache/zeppelin.git $ZEPPELIN_SRC
 
 WORKDIR $ZEPPELIN_SRC
 
@@ -30,14 +30,14 @@ RUN ./dev/change_scala_version.sh $SCALA_VER
 # install bower dependencies
 RUN npm install -g bower  \
 	&& cd zeppelin-web \
-    && bower install --config.interactive=false --allow-root --quiet \
-    && cd ..
+  && bower install --config.interactive=false --allow-root --silent \
+  && cd ..
 
 # get all the MVN dependencies out of the way 
-# RUN mvn verify clean -DskipTests -Dcheckstyle.skip --fail-never
+# RUN mvn --batch-mode verify clean -DskipTests -Dcheckstyle.skip --fail-never
  
 # build zeppelin with all interpreters and include Apache Spark & Python support
-RUN mvn package -DskipTests -Dcheckstyle.skip \
+RUN mvn --batch-mode package -DskipTests -Dcheckstyle.skip \
 	-Pscala-$SCALA_VER -Pspark-$SPARK_VER -Pr -Phelium-dev -Pexamples -Pbuild-distr
 
 
@@ -74,24 +74,24 @@ VOLUME $ZEPPELIN_CONF_DIR \
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
 	&& apt-get update && apt-get install -y --no-install-recommends \
 		curl \
-        jq \
+    jq \
 		nodejs \
 		python3 python3-pip \
-        r-base-dev r-cran-evaluate \
+    r-base-dev r-cran-evaluate \
 	&& rm -rf /var/lib/apt/lists/* \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python2 1 \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
-    && pip3 install --upgrade pip \
-    && pip3 install \
-          conda \
-          matplotlib \
-          numpy \
-          pandas \
-          py4j \
-          scikit-learn \
-          scipy \
-          seaborn \
-    && npm install -g yarn
+  && update-alternatives --install /usr/bin/python python /usr/bin/python2 1 \
+  && update-alternatives --install /usr/bin/python python /usr/bin/python3 2 \
+  && pip3 install --upgrade pip \
+  && pip3 install \
+    conda \
+    matplotlib \
+    numpy \
+    pandas \
+    py4j \
+    scikit-learn \
+    scipy \
+    seaborn \
+  && npm install -g yarn
 
 WORKDIR $ZEPPELIN_HOME
 
