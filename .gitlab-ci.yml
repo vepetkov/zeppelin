@@ -19,7 +19,8 @@ docker:
   only:
     - master
   script:
-    - docker build --build-arg BRANCH=${BRANCH} --build-arg SCALA_VER=${SCALA_VER} --build-arg SPARK_VER=${SPARK_VER} --build-arg COMMIT_ID=${CI_COMMIT_SHA} --build-arg BUILD_NUMBER=${CI_JOB_ID} -t ${APP}:latest .
+    - export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
+    - docker build --build-arg BRANCH=${BRANCH} --build-arg SCALA_VER=${SCALA_VER} --build-arg SPARK_VER=${SPARK_VER} --build-arg VCS_REF=${CI_COMMIT_SHA} --build-arg BUILD_DATE=${BUILD_DATE} -t ${APP}:latest .
     - docker login -u ${DOCKER_REGISTRY_USER} -p ${DOCKER_REGISTRY_PASS} "https://${DOCKER_REGISTRY}"
     - docker tag ${APP}:latest ${DOCKER_REGISTRY}/${REPOSITORY_NAME}:latest
     - docker tag ${APP}:latest ${DOCKER_REGISTRY}/${REPOSITORY_NAME}:${APP_VERSION}
