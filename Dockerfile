@@ -49,6 +49,7 @@ MAINTAINER Ventsislav Petkov <ventsi84@gmail.com>
 
 ARG BUILD_DATE=unknown
 ARG VCS_REF=unknown
+ARG VERSION="0.8.0-SNAPSHOT"
 
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.vcs-url="https://github.com/vepetkov/zeppelin.git"
