@@ -47,7 +47,7 @@ At least Docker 17.05 (Docker or Docker for Mac/Windows) is required as the buil
 # How to use from Docker CLI
 
 1. Start a (Docker Quickstart) Terminal
-2. Run command  `docker run -d -p 8080:8080 vpetkov/zeppelin`
+2. Run command  `docker run -d -p 8080:8080 vpetkov/zeppelin-0.8.0`
 4. Connect to Zeppelin from your favorite browser, e.g. ` http://localhost:8080/#/`
 
 # Enjoy! :)
