@@ -1,6 +1,10 @@
 # Zeppelin 0.8.0-SNAPSHOT
+[![](https://images.microbadger.com/badges/image/vpetkov/zeppelin-0.8.0.svg)](https://microbadger.com/images/vpetkov/zeppelin-0.8.0 "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/vpetkov/zeppelin-0.8.0.svg)](https://microbadger.com/images/vpetkov/zeppelin-0.8.0 "Get your own version badge on microbadger.com")
 
-Basic and *unofficial* [Docker](https://www.docker.com/what-docker) image for the development version of [Apache Zeppelin](http://zeppelin.apache.org), based on [Debian Stretch](https://wiki.debian.org/DebianStretch) and [OpenJDK 8](http://openjdk.java.net)
+Basic and *unofficial* [Docker](https://www.docker.com/what-docker) image for the development version of [Apache Zeppelin](http://zeppelin.apache.org), based on [Debian Stretch](https://wiki.debian.org/DebianStretch) and [OpenJDK 8](http://openjdk.java.net).
+
+
 
                         ##         .
                   ## ## ##        ==
