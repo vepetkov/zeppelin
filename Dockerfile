@@ -55,7 +55,7 @@ LABEL org.label-schema.vcs-url="https://github.com/vepetkov/zeppelin.git"
 LABEL org.label-schema.vcs-ref=$VCS_REF
 LABEL org.label-schema.version=$VERSION
 LABEL org.label-schema.schema-version="1.0.0-rc1"
-LABEL org.label-schema.docker.cmd= "docker run -d -p 8080:8080 vpetkov/zeppelin"
+LABEL org.label-schema.docker.cmd="docker run -d -p 8080:8080 vpetkov/zeppelin"
 
 ENV ZEPPELIN_VERSION=$VERSION \
 	ZEPPELIN_SRC="/usr/src/zeppelin" \
